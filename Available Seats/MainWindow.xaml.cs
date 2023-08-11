@@ -20,9 +20,22 @@ namespace Available_Seats
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static int leftButton = 0;
+        private static int rightButton = 0;
+        
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public void SayHello(object sender, RoutedEventArgs e)
+        {
+            Button button1 = (Button)sender;
+            bool isLeft = bool.Parse(button1.CommandParameter.ToString());
+            int? count = isLeft ? ++leftButton : ++rightButton;
+            button1.Content = count;
+            
+            Console.WriteLine("{0}. Hello", count);
         }
     }
 }
