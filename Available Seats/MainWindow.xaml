@@ -6,28 +6,39 @@
         xmlns:local="clr-namespace:Available_Seats"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key ="TextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="185"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Height" Value="300"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
+        <StackPanel Background="Aqua">
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="424" VerticalAlignment="Top" Width="800">
+                <Button HorizontalAlignment="Left" Height="270" Margin="50,0,0,0" VerticalAlignment="Center" Width="300" Click="SayHello" CommandParameter="true" Background="Red">
+                    <Button.Content>
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource TextStyle}">0</TextBlock>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </Border>
+        </StackPanel>
+
 
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="424" VerticalAlignment="Top" Width="800">
-            <Button HorizontalAlignment="Left" Height="270" Margin="50,0,0,0" VerticalAlignment="Center" Width="300" Click="SayHello" CommandParameter="true" Background="Red">
+            <Button HorizontalAlignment="Right" Height="270" Margin="0,0,50,0" VerticalAlignment="Center" Width="300" Click="SayHello" CommandParameter="false" Background="Lime" RenderTransformOrigin="0.189,0.504">
                 <Button.Content>
                     <StackPanel>
-                        <TextBlock Text="000" FontSize="185" TextAlignment="Center" Height="300" Width="300" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Style="{StaticResource TextStyle}">0</TextBlock>
                     </StackPanel>
                 </Button.Content>
             </Button>
         </Border>
-
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="424" VerticalAlignment="Top" Width="800">
-            <Button HorizontalAlignment="Left" Height="270" Margin="450,0,0,0" VerticalAlignment="Center" Width="300" Click="SayHello" CommandParameter="false" Background="Lime">
-                <Button.Content>
-                    <StackPanel>
-                        <TextBlock Text="000" FontSize="185" TextAlignment="Center" Height="267" Width="300" TextWrapping="Wrap"/>
-                    </StackPanel>
-                </Button.Content>
-            </Button>
-
-        </Border>
-
     </Grid>
 </Window>

@@ -30,11 +30,16 @@ namespace Available_Seats
 
         public void SayHello(object sender, RoutedEventArgs e)
         {
+            TextBlock textBlock = new TextBlock();
             Button button1 = (Button)sender;
             bool isLeft = bool.Parse(button1.CommandParameter.ToString());
-            int? count = isLeft ? ++leftButton : ++rightButton;
-            button1.Content = count;
-            
+            int count;
+
+            count = isLeft ? (++leftButton) : (++rightButton);
+            textBlock.Text = count.ToString();
+            textBlock.Style = (Style)Resources["TextStyle"];
+            button1.Content = textBlock;
+
             Console.WriteLine("{0}. Hello", count);
         }
     }
