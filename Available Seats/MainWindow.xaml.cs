@@ -1,31 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Available_Seats
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        private static int leftButton = 0;
-        private static int rightButton = 0;
+        private static int leftButton = 10;
+        private static int rightButton = 10;
         
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         public void SayHello(object sender, RoutedEventArgs e)
@@ -40,7 +28,50 @@ namespace Available_Seats
             textBlock.Style = (Style)Resources["TextStyle"];
             button1.Content = textBlock;
 
-            Console.WriteLine("{0}. Hello", count);
+            Console.WriteLine("{0} has been pressed {1} times", button1.Name, count);
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.D)
+            {
+                if (leftButton > 0)
+                {
+                    TextBlock current = (TextBlock)FindName("btnRed");
+                    TextBlock output = new TextBlock();
+                    output.Text = (--leftButton).ToString();
+                    current.Text = output.Text;
+
+                    Console.WriteLine("Button Red has been pressed {0} times", leftButton);
+                }
+                else
+                {
+                    Console.WriteLine("Button Red reached zero");
+                }
+            }
+            
+            if(e.Key == Key.J)
+            {
+                if(rightButton > 0)
+                {
+                    TextBlock current = (TextBlock)FindName("btnGreen");
+                    TextBlock output = new TextBlock();
+                    output.Text = (--rightButton).ToString();
+                    current.Text = output.Text;
+
+                    Console.WriteLine("Button Green has been pressed {0} times", leftButton);
+                }
+                else
+                {
+                    Console.WriteLine("Button Green reached zero");
+                }
+            }
+
+            if (e.Key == Key.Escape)
+            {
+                Close();
+            }
+            
         }
     }
 }

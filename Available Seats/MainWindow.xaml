@@ -3,42 +3,55 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Available_Seats"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Available Seats by danidark97" Height="844" Width="1500" ResizeMode="CanMinimize" KeyDown="Window_KeyDown">
     <Window.Resources>
         <Style x:Key ="TextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="185"/>
+            <Setter Property="FontSize" Value="370"/>
             <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="Height" Value="300"/>
-            <Setter Property="Width" Value="300"/>
+            <Setter Property="Height" Value="600"/>
+            <Setter Property="Width" Value="600"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
     </Window.Resources>
-    
+
     <Grid>
-        <StackPanel Background="Aqua">
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="424" VerticalAlignment="Top" Width="800">
-                <Button HorizontalAlignment="Left" Height="270" Margin="50,0,0,0" VerticalAlignment="Center" Width="300" Click="SayHello" CommandParameter="true" Background="Red">
-                    <Button.Content>
-                        <StackPanel>
-                            <TextBlock Style="{StaticResource TextStyle}">0</TextBlock>
-                        </StackPanel>
-                    </Button.Content>
-                </Button>
-            </Border>
-        </StackPanel>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
 
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="424" VerticalAlignment="Top" Width="800">
-            <Button HorizontalAlignment="Right" Height="270" Margin="0,0,50,0" VerticalAlignment="Center" Width="300" Click="SayHello" CommandParameter="false" Background="Lime" RenderTransformOrigin="0.189,0.504">
-                <Button.Content>
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource TextStyle}">0</TextBlock>
-                    </StackPanel>
-                </Button.Content>
-            </Button>
-        </Border>
+        <Grid Grid.Row="0">
+            <Rectangle Fill="Aqua"/>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="50">Posti disponibili</TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Grid.Column="0" Fill="Aqua"/>
+            <Rectangle Grid.Column="1" Fill="Aqua"/>
+
+            <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Name="btnRed" Background="Red" Style="{StaticResource TextStyle}">10</TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Name="btnGreen" Background="Lime" Style="{StaticResource TextStyle}">10</TextBlock>
+            </StackPanel>
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Rectangle Fill="Aqua"/>
+            <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Height="186" Width="1500" FontSize="15" Margin="24,10,0,0" >Come utilizzare il programma:<LineBreak/>D: diminuisce il rosso <LineBreak/>J: diminuisce il verde<LineBreak/>Esc: chiude il programma</TextBlock>
+        </Grid>
+
     </Grid>
 </Window>
