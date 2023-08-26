@@ -12,6 +12,7 @@ namespace Available_Seats
         
         public MainWindow()
         {
+            this.WindowState = WindowState.Maximized;
             InitializeComponent();
 
         }

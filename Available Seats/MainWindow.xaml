@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Available Seats by danidark97" Height="844" Width="1500" ResizeMode="CanMinimize" KeyDown="Window_KeyDown">
+        Title="Available Seats by danidark97" Height="844" Width="1500" ResizeMode="CanMinimize" WindowState="Maximized" KeyDown="Window_KeyDown">
     <Window.Resources>
         <Style x:Key ="TextStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="370"/>
@@ -39,11 +39,15 @@
             <Rectangle Grid.Column="1" Fill="Aqua"/>
 
             <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Name="btnRed" Background="Red" Style="{StaticResource TextStyle}">10</TextBlock>
+                <Border BorderBrush="Black" BorderThickness="5" CornerRadius="10">
+                    <TextBlock Name="btnRed" Background="Red" Style="{StaticResource TextStyle}">10</TextBlock>
+                </Border>
             </StackPanel>
 
             <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Name="btnGreen" Background="Lime" Style="{StaticResource TextStyle}">10</TextBlock>
+                <Border BorderBrush="Black" BorderThickness="5" CornerRadius="10">
+                    <TextBlock Name="btnGreen" Background="Lime" Style="{StaticResource TextStyle}">10</TextBlock>
+                </Border>
             </StackPanel>
 
         </Grid>
