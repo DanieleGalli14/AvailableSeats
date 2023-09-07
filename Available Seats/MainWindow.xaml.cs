@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
+using System.IO;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -7,14 +10,47 @@ namespace Available_Seats
 {
     public partial class MainWindow : Window
     {
-        private static int leftButton = 10;
-        private static int rightButton = 10;
-        
+        private int _leftButton = 10;
+        public int LeftButton
+        {
+            get { return _leftButton; }
+            set { _leftButton = value; OnPropertyChanged(); }
+        }
+        private int _rightButton = 10;
+        public int RightButton
+        {
+            get { return _rightButton; }
+            set { _rightButton = value; OnPropertyChanged(); }
+        }
+
+        private int MaxLeft;
+        private int MaxRight;
+
         public MainWindow()
         {
-            this.WindowState = WindowState.Maximized;
+            DataContext = this;
+            WindowState = WindowState.Maximized;
+            string[] lines = File.ReadAllLines(@"files/list.txt");
+
+            foreach (string line in lines)
+            {
+                if(line.Split(' ')[0].Equals("Red"))
+                {
+                    LeftButton = MaxLeft = int.Parse(line.Split(' ')[1]);
+                }
+                else
+                {
+                    RightButton = MaxRight = int.Parse(line.Split(' ')[1]);
+                }
+            }
             InitializeComponent();
 
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void SayHello(object sender, RoutedEventArgs e)
@@ -24,7 +60,7 @@ namespace Available_Seats
             bool isLeft = bool.Parse(button1.CommandParameter.ToString());
             int count;
 
-            count = isLeft ? (++leftButton) : (++rightButton);
+            count = isLeft ? (++LeftButton) : (++RightButton);
             textBlock.Text = count.ToString();
             textBlock.Style = (Style)Resources["TextStyle"];
             button1.Content = textBlock;
@@ -36,14 +72,14 @@ namespace Available_Seats
         {
             if (e.Key == Key.D)
             {
-                if (leftButton > 0)
+                if (LeftButton > 0)
                 {
                     TextBlock current = (TextBlock)FindName("btnRed");
                     TextBlock output = new TextBlock();
-                    output.Text = (--leftButton).ToString();
+                    output.Text = (--LeftButton).ToString();
                     current.Text = output.Text;
 
-                    Console.WriteLine("Button Red has been pressed {0} times", leftButton);
+                    Console.WriteLine("Button Red has been pressed {0} times", LeftButton);
                 }
                 else
                 {
@@ -53,14 +89,14 @@ namespace Available_Seats
             
             if(e.Key == Key.J)
             {
-                if(rightButton > 0)
+                if(RightButton > 0)
                 {
                     TextBlock current = (TextBlock)FindName("btnGreen");
                     TextBlock output = new TextBlock();
-                    output.Text = (--rightButton).ToString();
+                    output.Text = (--RightButton).ToString();
                     current.Text = output.Text;
 
-                    Console.WriteLine("Button Green has been pressed {0} times", leftButton);
+                    Console.WriteLine("Button Green has been pressed {0} times", RightButton);
                 }
                 else
                 {

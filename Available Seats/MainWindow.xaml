@@ -40,13 +40,13 @@
 
             <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Border BorderBrush="Black" BorderThickness="5" CornerRadius="10">
-                    <TextBlock Name="btnRed" Background="Red" Style="{StaticResource TextStyle}">10</TextBlock>
+                    <TextBlock Name="btnRed" Background="Red" Style="{StaticResource TextStyle}" Text="{Binding Path=LeftButton, Mode=TwoWay}"></TextBlock>
                 </Border>
             </StackPanel>
 
             <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Border BorderBrush="Black" BorderThickness="5" CornerRadius="10">
-                    <TextBlock Name="btnGreen" Background="Lime" Style="{StaticResource TextStyle}">10</TextBlock>
+                    <TextBlock Name="btnGreen" Background="Lime" Style="{StaticResource TextStyle}" Text="{Binding Path=RightButton, Mode=TwoWay}"></TextBlock>
                 </Border>
             </StackPanel>
 
