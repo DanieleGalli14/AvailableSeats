@@ -30,7 +30,7 @@ namespace Available_Seats
         {
             DataContext = this;
             WindowState = WindowState.Maximized;
-            string[] lines = File.ReadAllLines(@"files/list.txt");
+            string[] lines = File.ReadAllLines(@".\list.txt");
 
             foreach (string line in lines)
             {
