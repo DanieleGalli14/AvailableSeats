@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+
 namespace Available_Seats
 {
     public partial class MainWindow : Window
@@ -30,20 +31,19 @@ namespace Available_Seats
         {
             DataContext = this;
             WindowState = WindowState.Maximized;
-            string[] lines = File.ReadAllLines(@".\list.txt");
 
-            foreach (string line in lines)
-            {
-                if(line.Split(' ')[0].Equals("Red"))
-                {
-                    LeftButton = MaxLeft = int.Parse(line.Split(' ')[1]);
-                }
-                else
-                {
-                    RightButton = MaxRight = int.Parse(line.Split(' ')[1]);
-                }
+            try
+            { 
+               InizializeValues();
             }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show($"File non trovato: {ex.FileName}\nErrore: {ex.Message}\nProcedo con la chiusura", "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
+                Environment.Exit(1);
+            }
+
             InitializeComponent();
+            SetFooter();
 
         }
 
@@ -53,62 +53,70 @@ namespace Available_Seats
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void SayHello(object sender, RoutedEventArgs e)
-        {
-            TextBlock textBlock = new TextBlock();
-            Button button1 = (Button)sender;
-            bool isLeft = bool.Parse(button1.CommandParameter.ToString());
-            int count;
-
-            count = isLeft ? (++LeftButton) : (++RightButton);
-            textBlock.Text = count.ToString();
-            textBlock.Style = (Style)Resources["TextStyle"];
-            button1.Content = textBlock;
-
-            Console.WriteLine("{0} has been pressed {1} times", button1.Name, count);
-        }
-
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.D)
+            if(e.Key == Key.D || e.Key == Key.E) 
             {
-                if (LeftButton > 0)
-                {
-                    TextBlock current = (TextBlock)FindName("btnRed");
-                    TextBlock output = new TextBlock();
-                    output.Text = (--LeftButton).ToString();
-                    current.Text = output.Text;
 
-                    Console.WriteLine("Button Red has been pressed {0} times", LeftButton);
-                }
-                else
-                {
-                    Console.WriteLine("Button Red reached zero");
-                }
+                TextBlock current = (TextBlock)FindName("btnRed");
+                TextBlock output = new TextBlock();
+                
+                if(e.Key == Key.D && LeftButton > 0) --LeftButton;
+
+                if (e.Key == Key.E && LeftButton < MaxLeft) ++LeftButton;
+
+                output.Text = LeftButton.ToString();
+
+                current.Text = output.Text;
+
             }
-            
-            if(e.Key == Key.J)
+
+            if(e.Key == Key.J || e.Key == Key.U)
             {
-                if(RightButton > 0)
-                {
-                    TextBlock current = (TextBlock)FindName("btnGreen");
-                    TextBlock output = new TextBlock();
-                    output.Text = (--RightButton).ToString();
-                    current.Text = output.Text;
+                TextBlock current = (TextBlock)FindName("btnGreen");
+                TextBlock output = new TextBlock();
 
-                    Console.WriteLine("Button Green has been pressed {0} times", RightButton);
-                }
-                else
-                {
-                    Console.WriteLine("Button Green reached zero");
-                }
+                if (e.Key == Key.J && RightButton > 0) --RightButton;
+
+                if (e.Key == Key.U && RightButton < MaxRight) ++RightButton;
+
+                output.Text = RightButton.ToString();
+
+                current.Text = output.Text;
             }
+
 
             if (e.Key == Key.Escape)
             {
-                Close();
+                if(CloseConfirm.Confirm()) Close();
             }
             
+        }
+
+        private void InizializeValues()
+        {
+            string[] lines = File.ReadAllLines(@".\list.txt");
+
+            foreach (string line in lines)
+            {
+                if (line.Split(' ')[0].Equals("Red"))
+                {
+                    LeftButton = MaxLeft = int.Parse(line.Split(' ')[1]);
+                }
+                else
+                {
+                    RightButton = MaxRight = int.Parse(line.Split(' ')[1]);
+                }
+            }
+        }
+
+        private void SetFooter()
+        {
+            TextBlock footer = (TextBlock)FindName("footerTutorial");
+            footer.Text = "Come utilizzare il programma:\n" +
+                          "D: diminuisce il rosso \t\t E: incrementa il rosso \n" +
+                          "J: diminuisce il verde \t\t U: Incrementa il verde\n" +
+                          "Esc: chiude il programma";
         }
     }
 }

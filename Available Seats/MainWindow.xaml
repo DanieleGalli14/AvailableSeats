@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Available Seats by danidark97" Height="844" Width="1500" ResizeMode="CanMinimize" WindowState="Maximized" KeyDown="Window_KeyDown">
+        Title="Available Seats by danidark97" Height="844" Width="1500" ResizeMode="CanMinimize" WindowStyle="None" WindowState="Maximized" KeyDown="Window_KeyDown">
     <Window.Resources>
         <Style x:Key ="TextStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="370"/>
@@ -54,7 +54,8 @@
 
         <Grid Grid.Row="2">
             <Rectangle Fill="Aqua"/>
-            <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Height="186" Width="1500" FontSize="15" Margin="24,10,0,0" >Come utilizzare il programma:<LineBreak/>D: diminuisce il rosso <LineBreak/>J: diminuisce il verde<LineBreak/>Esc: chiude il programma</TextBlock>
+            <TextBlock Name="footerTutorial" VerticalAlignment="Top" HorizontalAlignment="Left" Height="170" Width="1500" FontSize="15" Margin="40,10,0,0" ></TextBlock>
+            
         </Grid>
 
     </Grid>
